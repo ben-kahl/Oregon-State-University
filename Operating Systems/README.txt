@@ -1,4 +1,4 @@
-Benjamin Kahl ONID: 934546520
+Benjamin Kahl ONID: 
 Instructions to compile:
 gcc -o <executable name> movies.h movies.c
 
