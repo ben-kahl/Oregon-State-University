@@ -15,4 +15,3 @@ func new_round():
 	$Character1.start($Player1StartPos.position)
 	$RoundTimer.start()
 	pass
-
