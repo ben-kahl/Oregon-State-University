@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3 uid="uid://cywnja507nbc4"]
+
+[ext_resource type="Texture2D" uid="uid://dspqkbb316dr0" path="res://icon.svg" id="1_s7tqs"]
+
+[node name="MainMenu" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -41.0
+offset_right = 275.0
+offset_bottom = 1.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "Made with Godot 4"
+
+[node name="Versus" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.052
+anchor_top = 0.185
+anchor_right = 0.123
+anchor_bottom = 0.244
+offset_left = 0.159996
+offset_top = 0.199997
+offset_right = -0.160004
+offset_bottom = -0.52002
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Versus"
+
+[node name="Training" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.052
+anchor_top = 0.311
+anchor_right = 0.138
+anchor_bottom = 0.369
+offset_left = 0.159996
+offset_top = 0.119965
+offset_right = 0.039978
+offset_bottom = 0.47998
+theme_override_font_sizes/font_size = 40
+text = "Training"
+
+[node name="Network" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.052
+anchor_top = 0.437
+anchor_right = 0.143
+anchor_bottom = 0.495
+offset_left = 0.159996
+offset_top = 0.039978
+offset_right = 0.440002
+offset_bottom = 0.399963
+theme_override_font_sizes/font_size = 40
+text = "Network"
+
+[node name="Exit" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.052
+anchor_top = 0.556
+anchor_right = 0.093
+anchor_bottom = 0.614
+offset_left = 0.159996
+offset_top = -0.480042
+offset_right = 0.440002
+offset_bottom = -0.119995
+theme_override_font_sizes/font_size = 40
+text = "Exit"
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(312, 1048)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_s7tqs")
+
+[node name="Label2" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -161.0
+offset_top = -55.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "Controls"
