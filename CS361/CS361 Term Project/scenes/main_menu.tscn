@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cywnja507nbc4"]
+[gd_scene load_steps=3 format=3 uid="uid://cywnja507nbc4"]
 
 [ext_resource type="Texture2D" uid="uid://dspqkbb316dr0" path="res://icon.svg" id="1_s7tqs"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_y3hfr"]
 
 [node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_y3hfr")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -12,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="."]
+[node name="MadeWith" type="Label" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -82,7 +84,7 @@ position = Vector2(312, 1048)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_s7tqs")
 
-[node name="Label2" type="Label" parent="."]
+[node name="ControlLegend" type="Label" parent="."]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -94,3 +96,12 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 40
 text = "Controls"
+
+[node name="NetworkMsg" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="pressed" from="Versus" to="." method="_on_versus_pressed"]
+[connection signal="pressed" from="Training" to="." method="_on_training_pressed"]
+[connection signal="pressed" from="Network" to="." method="_on_network_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
