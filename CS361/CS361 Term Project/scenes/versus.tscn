@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmksxolfm4cey"]
+[gd_scene load_steps=4 format=3 uid="uid://dmksxolfm4cey"]
 
+[ext_resource type="Script" path="res://scripts/versus.gd" id="1_4omcc"]
 [ext_resource type="Texture2D" uid="uid://dmnmpgg22xinx" path="res://art/stage1Background.png" id="1_dos3d"]
 [ext_resource type="PackedScene" uid="uid://du6oabv526v8a" path="res://scenes/character1.tscn" id="2_n67mf"]
 
 [node name="Node" type="Node"]
+script = ExtResource("1_4omcc")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 8
@@ -19,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_dos3d")
 
-[node name="Round Timer" type="Timer" parent="."]
+[node name="RoundTimer" type="Timer" parent="."]
 
 [node name="Player1StartPos" type="Marker2D" parent="."]
 position = Vector2(800, 780)
