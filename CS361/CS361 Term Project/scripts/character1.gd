@@ -1,33 +1,72 @@
 extends CharacterBody2D
 
-@export var walkSpeed = 400
+const WALKSPEED = 300.0
+const JUMP_VELOCITY = -600.0
+const DASH_DURATION = 7
+const DASH_DISTANCE = 750
+const TRACTION = 40
+
 var screen_size
-# Called when the node enters the scene tree for the first time.
+var isInAnim
+var curFrame = 0
 
+@onready var states = $State
 
+func update_frame():
+	curFrame += 1
+	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
+func reset_frame():
+	curFrame = 0
+	pass
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+func _ready():
+	screen_size = get_viewport_rect().size
+	hide()
+	pass # Replace with function body.
+
+func _input(event):
 	
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * walkSpeed
-		#add animations in here like so:
-		#$AnimatedSprite2D.play()
-		#else:
-		#$AnimatedSprite2D.stop()
-	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
+	if Input.is_action_pressed("attack_a"):
+		$Character1Sprite.play("Attack1")
+	pass
+
+func turn(dir):
+	var direction = 0
+	if dir:
+		direction = 1
+	else:
+		direction = -1
+	$Character1Sprite.set_flip_h(direction)
+
+func _physics_process(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y += gravity * delta
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	#var direction = Input.get_axis("move_left", "move_right")
+	#
+	#if direction:
+		#velocity.x = direction * WALKSPEED
+	#else:
+		#velocity.x = move_toward(velocity.x, 0, WALKSPEED)
 	
-	#add more animation control
+	
+	if velocity.x != 0.0:
+		$Character1Sprite.play("Run")
+
+	$Frame.text = str(curFrame)
+	#move_and_slide()
 	pass
 
 
+func start(pos):
+	position = pos
+	show()
+	$CollisionBox.disabled = false
+	pass
