@@ -24,7 +24,7 @@ offset_bottom = 1.0
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 30
-text = "Made with Godot 4"
+text = "Made with Godot 4.2"
 
 [node name="Versus" type="Button" parent="."]
 anchors_preset = -1
@@ -80,7 +80,7 @@ theme_override_font_sizes/font_size = 40
 text = "Exit"
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(312, 1048)
+position = Vector2(335, 1052)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_s7tqs")
 
@@ -95,11 +95,7 @@ offset_top = -55.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 40
-text = "Controls"
-
-[node name="NetworkMsg" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+text = "Use the mouse and left click to select mode"
 
 [connection signal="pressed" from="Versus" to="." method="_on_versus_pressed"]
 [connection signal="pressed" from="Training" to="." method="_on_training_pressed"]

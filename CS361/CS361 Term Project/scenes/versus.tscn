@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmksxolfm4cey"]
+[gd_scene load_steps=8 format=3 uid="uid://dmksxolfm4cey"]
 
 [ext_resource type="Script" path="res://scripts/versus.gd" id="1_4omcc"]
 [ext_resource type="Texture2D" uid="uid://dmnmpgg22xinx" path="res://art/stage1Background.png" id="1_dos3d"]
 [ext_resource type="PackedScene" uid="uid://du6oabv526v8a" path="res://scenes/character1.tscn" id="2_n67mf"]
+[ext_resource type="Script" path="res://scripts/HealthBarP1.gd" id="4_qe1jm"]
+[ext_resource type="PackedScene" uid="uid://d0vit3ssobmxx" path="res://scenes/pause_menu.tscn" id="5_u86co"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogvlw"]
 size = Vector2(3097, 8)
@@ -13,10 +15,13 @@ size = Vector2(60, 1094)
 [node name="Node" type="Node"]
 script = ExtResource("1_4omcc")
 
+[node name="RoundTimer" type="Timer" parent="."]
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_enabled = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(960, 540)
 metadata/_edit_group_ = true
 
 [node name="stage" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
@@ -24,24 +29,55 @@ texture = ExtResource("1_dos3d")
 metadata/_edit_group_ = true
 
 [node name="Bounds" type="StaticBody2D" parent="ParallaxBackground"]
+position = Vector2(-608, 540)
+collision_layer = 3
 metadata/_edit_group_ = true
 
 [node name="Floor" type="CollisionShape2D" parent="ParallaxBackground/Bounds"]
-position = Vector2(0, 540)
+position = Vector2(1575, 540)
 shape = SubResource("RectangleShape2D_ogvlw")
 
 [node name="LeftWall" type="CollisionShape2D" parent="ParallaxBackground/Bounds"]
-position = Vector2(-1572, -4)
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_evgoj")
 
 [node name="RightWall" type="CollisionShape2D" parent="ParallaxBackground/Bounds"]
-position = Vector2(1572, -4)
+position = Vector2(3125, -4)
 shape = SubResource("RectangleShape2D_evgoj")
 
-[node name="RoundTimer" type="Timer" parent="."]
-
 [node name="Player1StartPos" type="Marker2D" parent="."]
-position = Vector2(-400, 200)
+position = Vector2(967, 540)
 
 [node name="Character1" parent="." instance=ExtResource("2_n67mf")]
 visible = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 536)
+drag_left_margin = 0.0
+drag_right_margin = 0.0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HealthBarP1" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("player1")]
+offset_left = 91.0
+offset_right = 855.0
+offset_bottom = 65.0
+script = ExtResource("4_qe1jm")
+player1 = NodePath("../../Character1")
+
+[node name="HealthBarP2" type="ProgressBar" parent="HUD"]
+offset_left = 1062.0
+offset_right = 1826.0
+offset_bottom = 65.0
+
+[node name="RoundTime" type="Label" parent="HUD"]
+offset_left = 896.0
+offset_top = -1.0
+offset_right = 1023.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_u86co")]
