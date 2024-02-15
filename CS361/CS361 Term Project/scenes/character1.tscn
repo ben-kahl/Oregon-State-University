@@ -1,8 +1,9 @@
-[gd_scene load_steps=55 format=3 uid="uid://du6oabv526v8a"]
+[gd_scene load_steps=57 format=3 uid="uid://du6oabv526v8a"]
 
 [ext_resource type="Script" path="res://scripts/character1.gd" id="1_8bhqe"]
 [ext_resource type="Texture2D" uid="uid://dljhl2f6dbyej" path="res://art/Martial Hero/Sprites/Attack1.png" id="2_6sets"]
-[ext_resource type="Script" path="res://scripts/StateMachineChar1.gd" id="2_56fhw"]
+[ext_resource type="Script" path="res://scripts/sm_char_1.gd" id="2_56fhw"]
+[ext_resource type="PackedScene" uid="uid://dhjw00cpa1bg4" path="res://scenes/hitbox.tscn" id="2_ix0gc"]
 [ext_resource type="Texture2D" uid="uid://dkxye3anfyvjk" path="res://art/Martial Hero/Sprites/Death.png" id="3_s0mtn"]
 [ext_resource type="Texture2D" uid="uid://b877el3ghj0dc" path="res://art/Martial Hero/Sprites/Jump.png" id="4_25ok7"]
 [ext_resource type="Texture2D" uid="uid://0jr5354di4ba" path="res://art/Martial Hero/Sprites/Fall.png" id="4_b61d6"]
@@ -303,7 +304,6 @@ animations = [{
 [sub_resource type="Animation" id="Animation_ysp03"]
 resource_name = "Attack1"
 length = 0.300002
-loop_mode = 1
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -313,6 +313,22 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0333334, 0.0666668, 0.1, 0.133334, 0.183334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_6xt20"]
+resource_name = "Crouch"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
@@ -402,6 +418,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_00aio"]
 _data = {
 "Attack1": SubResource("Animation_ysp03"),
+"Crouch": SubResource("Animation_6xt20"),
 "Hit": SubResource("Animation_uqdjs"),
 "Idle": SubResource("Animation_b2bte"),
 "Jump": SubResource("Animation_oq6dt"),
@@ -415,6 +432,7 @@ size = Vector2(32, 56)
 [node name="Character1" type="CharacterBody2D"]
 collision_layer = 3
 script = ExtResource("1_8bhqe")
+hitbox = ExtResource("2_ix0gc")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_56fhw")
@@ -422,9 +440,11 @@ script = ExtResource("2_56fhw")
 [node name="Character1Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(8.77, 8.77)
 sprite_frames = SubResource("SpriteFrames_dcwh6")
-animation = &"Idle"
+animation = &"Crouch"
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Character1Sprite"]
+reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_00aio")
 }

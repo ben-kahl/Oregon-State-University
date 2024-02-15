@@ -95,7 +95,7 @@ offset_top = -55.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 40
-text = "Use the mouse and left click to select mode"
+text = "Use the mouse and left click to navigate menus"
 
 [connection signal="pressed" from="Versus" to="." method="_on_versus_pressed"]
 [connection signal="pressed" from="Training" to="." method="_on_training_pressed"]
