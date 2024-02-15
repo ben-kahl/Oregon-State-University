@@ -21,9 +21,11 @@ var player_list = []
 func set_params(width, height, damage, duration, active_start, recovery_start, oh, ob, t, pb, pos, parent = get_parent()):
 	#Set position to the player character
 	position = Vector2(0,0)
-	#
+	#Add to list so that player doesn't get hit by their own move
 	player_list.append(parent)
+	#Don't allow hitbox to collide with itself
 	player_list.append(self)
+	#Set parameters
 	w = width
 	h = height
 	dmg = damage
@@ -35,6 +37,7 @@ func set_params(width, height, damage, duration, active_start, recovery_start, o
 	type = t
 	push_back = pb
 	position = pos
+	#Actually set shape to desired size
 	update_extents()
 	#connect("area_entered", Hitbox_Collide)
 	set_physics_process(true)
@@ -56,7 +59,7 @@ func _physics_process(delta):
 		queue_free()
 		return
 	if get_parent().cur_state != parent_state:
-		##Make sure character is still attacking
-		##On next frame, free the hitbox
+		#Make sure character is still attacking
+		#On next frame, free the hitbox
 		queue_free()
 		return

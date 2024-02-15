@@ -51,7 +51,12 @@ shape = SubResource("RectangleShape2D_evgoj")
 [node name="Player1StartPos" type="Marker2D" parent="."]
 position = Vector2(576, 831)
 
+[node name="Player2StartPos" type="Marker2D" parent="."]
+position = Vector2(1300, 831)
+
 [node name="Character1" parent="." instance=ExtResource("3_rirq4")]
+
+[node name="Character2" parent="." instance=ExtResource("3_rirq4")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 536)
@@ -75,12 +80,13 @@ script = ExtResource("5_sgoq4")
 player1 = NodePath("../../Character1")
 metadata/_edit_group_ = true
 
-[node name="HealthBarP2" type="ProgressBar" parent="HUD"]
+[node name="HealthBarP2" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("player2")]
 offset_left = 1062.0
 offset_right = 1826.0
 offset_bottom = 65.0
 show_percentage = false
 script = ExtResource("6_yqfwc")
+player2 = NodePath("../../Character2")
 metadata/_edit_group_ = true
 
 [node name="RoundTime" type="Label" parent="HUD"]
@@ -99,3 +105,4 @@ visible = false
 
 [connection signal="timeout" from="HealthReset" to="." method="_on_health_reset_timeout"]
 [connection signal="health_changed" from="Character1" to="." method="_on_character_1_health_changed"]
+[connection signal="health_changed" from="Character2" to="HUD/HealthBarP2" method="_on_character_2_health_changed"]

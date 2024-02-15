@@ -3,7 +3,7 @@ class_name Character1
 
 signal health_changed
 
-const WALKSPEED = 300.0
+const WALKSPEED = 400.0
 const JUMP_VELOCITY = -1800.0
 const DASH_DURATION = 15
 const DASH_DISTANCE = 750
@@ -20,7 +20,7 @@ var cur_health
 
 @onready var states = $State
 
-@onready var cur_state = $State.text
+var cur_state
 
 @export var hitbox : PackedScene
 
@@ -49,15 +49,17 @@ func turn(dir):
 	
 func play_animation(anim):
 	$Character1Sprite.play(anim)
-	pass
 
-func create_hitbox(width, height, damage, duration, active_start, recovery_start, on_hit, on_block, type, push_back):
+func stop_animation():
+	$Character1Sprite.stop()
+
+func create_hitbox(width, height, damage, duration, active_start, recovery_start, on_hit, on_block, type, push_back, points):
 	var hitbox_instance = hitbox.instantiate()
-	add_child(hitbox_instance)
+	self.add_child(hitbox_instance)
 	if $Character1Sprite.flip_h == false:
-		hitbox_instance.set_params(width, height, damage, duration, active_start, recovery_start, on_hit, on_block, type, push_back, position)
+		hitbox_instance.set_params(width, height, damage, duration, active_start, recovery_start, on_hit, on_block, type, push_back, points)
 	else:
-		var flipped_position = Vector2(-position.x, position.y)
+		var flipped_position = Vector2(-points.x, points.y)
 		hitbox_instance.set_params(width, height, damage, duration, active_start, recovery_start, on_hit, on_block, type, push_back, flipped_position)
 	return hitbox_instance
 
@@ -78,6 +80,6 @@ func start(pos):
 	
 func attack_a():
 	if curFrame == 8:
-		create_hitbox(944, 592, 150, 18, 8, 11, 20, -5, "mid", 100)
+		create_hitbox(500, 300, 150, 18, 8, 15, 20, -5, "mid", 100, Vector2(225, -200))
 	if curFrame == 18:
 		return true

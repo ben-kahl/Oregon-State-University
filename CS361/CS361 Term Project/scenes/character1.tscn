@@ -318,6 +318,22 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_6xt20"]
+resource_name = "Crouch"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
 [sub_resource type="Animation" id="Animation_uqdjs"]
 resource_name = "Hit"
 step = 0.0166667
@@ -399,22 +415,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_6xt20"]
-resource_name = "Crouch"
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_00aio"]
 _data = {
 "Attack1": SubResource("Animation_ysp03"),
@@ -441,8 +441,10 @@ script = ExtResource("2_56fhw")
 scale = Vector2(8.77, 8.77)
 sprite_frames = SubResource("SpriteFrames_dcwh6")
 animation = &"Crouch"
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Character1Sprite"]
+reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_00aio")
 }

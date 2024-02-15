@@ -15,7 +15,6 @@ func _ready():
 	add_state('GROUND_ATTACK')
 	add_state('AIR_ATTACK')
 	call_deferred("set_state", states.STAND)
-	pass # Replace with function body.
 
 func state_logic(delta):
 	parent.update_frame()
@@ -30,16 +29,26 @@ func get_transition(delta):
 				#parent.reset_frame()
 				#parent.velocity.y = parent.JUMP_VELOCITY
 				#return states.JUMP
-			if (Input.is_action_just_pressed("move_right")):
+			if Input.is_action_pressed("move_down"):
+				parent.reset_frame()
+				return states.CROUCH
+			
+			if (Input.is_action_just_pressed("dash_right")):
 				parent.velocity.x = parent.DASH_DISTANCE
 				parent.reset_frame()
 				parent.turn(false)
 				return states.DASH
-			if (Input.is_action_just_pressed("move_left")):
+			if (Input.is_action_just_pressed("dash_left")):
 				parent.velocity.x = -parent.DASH_DISTANCE
 				parent.reset_frame()
 				parent.turn(true)
 				return states.DASH
+			if (Input.is_action_pressed("move_right")):
+				parent.reset_frame()
+				return states.WALK
+			if (Input.is_action_pressed("move_left")):
+				parent.reset_frame()
+				return states.WALK
 			#if (Input.is_action_just_pressed("move_down")):
 				#parent.reset_frame()
 				#return states.CROUCH
@@ -53,8 +62,13 @@ func get_transition(delta):
 				parent.velocity.x += parent.TRACTION*1
 				parent.velocity.x = clamp(parent.velocity.x, parent.velocity.x, 0)
 		states.CROUCH:
-			#return states.CROUCH
-			pass
+			if Input.is_action_just_released("move_down"):
+				parent.reset_frame()
+				return states.STAND
+			elif parent.velocity.x != 0:
+				parent.velocity.x = 0
+			#if parent.curFrame == 36:
+				#parent.stop_animation()
 		states.JUMP:
 			# Handle jump.
 			if parent.velocity.y <= 0 && not parent.is_on_floor():
@@ -82,22 +96,39 @@ func get_transition(delta):
 				return states.STAND
 		states.ATTACK_A:
 			#TODO: Implement hitboxes and crud
-			if parent.curFrame >= 1:
-				if parent.velocity.x != 0:
-					parent.velocity.x = clamp(parent.velocity.x, 0, parent.velocity.x)
+			#if parent.curFrame >= 1:
+				#if parent.velocity.x != 0:
+					#parent.velocity.x = clamp(parent.velocity.x, 0, parent.velocity.x)
 			if parent.attack_a() == true:
 				parent.reset_frame()
 				return states.STAND
 			if parent.curFrame >= parent.ATTACK_A_DURATION:
 				return states.STAND
-			pass
-	pass
-	
+		states.WALK:
+			#if Input.is_action_just_pressed("move_up"):
+				#parent.reset_frame()
+				#return states.JUMP
+			if Input.is_action_just_pressed("move_down"):
+				parent.reset_frame()
+				return states.CROUCH
+			if Input.get_action_strength("move_left"):
+				parent.velocity.x = -parent.WALKSPEED
+				#parent.turn(true)
+			elif Input.get_action_strength("move_right"):
+				parent.velocity.x = parent.WALKSPEED
+				parent.turn(false)
+			else:
+				parent.reset_frame()
+				return states.STAND
+
 func enter_state(new_state, old_state):
 	match new_state:
 		states.STAND:
 			parent.play_animation("Idle")
 			parent.states.text = "STAND"
+		states.WALK:
+			parent.play_animation("Run")
+			parent.states.text = "WALK"
 		states.DASH:
 			parent.play_animation("Run")
 			parent.states.text = "DASH"

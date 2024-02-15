@@ -64,3 +64,13 @@ text = "Resume"
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Back to Main Menu"
+
+[node name="Controls" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "A to move left, D to move right
+Shift+A/D to sprint left/right
+O to attack
+ESC for pause
+Use mouse to navigate pause menu"
+horizontal_alignment = 1
+vertical_alignment = 1
