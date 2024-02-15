@@ -12,7 +12,7 @@ func _process(delta):
 
 
 func _on_training_pressed():
-	get_tree().change_scene_to_file("res://scenes/versus.tscn")
+	get_tree().change_scene_to_file("res://scenes/training.tscn")
 	pass # Replace with function body.
 
 
